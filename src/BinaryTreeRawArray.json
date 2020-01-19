@@ -1,0 +1,145 @@
+{
+    "key": 1,
+    "left": {
+        "key": 2,
+        "left": {
+            "key": 4,
+            "left": {
+                "key": 8,
+                "left": {
+                    "key": 15,
+                    "left": {
+                        "key": 23,
+                        "left": null,
+                        "right": null
+                    },
+                    "right": null
+                },
+                "right": {
+                    "key": 16,
+                    "left": {
+                        "key": 24,
+                        "left": {
+                            "key": 32,
+                            "left": null,
+                            "right": null
+                        },
+                        "right": null
+                    },
+                    "right": {
+                        "key": 25,
+                        "left": {
+                            "key": 33,
+                            "left": null,
+                            "right": null
+                        },
+                        "right": null
+                    }
+                }
+            },
+            "right": {
+                "key": 9,
+                "left": null,
+                "right": null
+            }
+        },
+        "right": {
+            "key": 5,
+            "left": {
+                "key": 10,
+                "left": {
+                    "key": 17,
+                    "left": null,
+                    "right": null
+                },
+                "right": {
+                    "key": 18,
+                    "left": {
+                        "key": 26,
+                        "left": null,
+                        "right": null
+                    },
+                    "right": {
+                        "key": 27,
+                        "left": {
+                            "key": 34,
+                            "left": null,
+                            "right": null
+                        },
+                        "right": null
+                    }
+                }
+            },
+            "right": {
+                "key": 11,
+                "left": null,
+                "right": null
+            }
+        }
+    },
+    "right": {
+        "key": 3,
+        "left": {
+            "key": 6,
+            "left": null,
+            "right": {
+                "key": 12,
+                "left": {
+                    "key": 19,
+                    "left": null,
+                    "right": null
+                },
+                "right": {
+                    "key": 20,
+                    "left": {
+                        "key": 28,
+                        "left": null,
+                        "right": null
+                    },
+                    "right": {
+                        "key": 29,
+                        "left": {
+                            "key": 35,
+                            "left": null,
+                            "right": null
+                        },
+                        "right": {
+                            "key": 36,
+                            "left": null,
+                            "right": null
+                        }
+                    }
+                }
+            }
+        },
+        "right": {
+            "key": 7,
+            "left": {
+                "key": 13,
+                "left": null,
+                "right": null
+            },
+            "right": {
+                "key": 14,
+                "left": {
+                    "key": 21,
+                    "left": null,
+                    "right": null
+                },
+                "right": {
+                    "key": 22,
+                    "left": {
+                        "key": 30,
+                        "left": null,
+                        "right": null
+                    },
+                    "right": {
+                        "key": 31,
+                        "left": null,
+                        "right": null
+                    }
+                }
+            }
+        }
+    }
+}

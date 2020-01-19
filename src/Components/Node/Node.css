@@ -1,0 +1,9 @@
+.Node .value {
+    width: 100px;
+    height: 100px;
+    border: solid 1px #000;
+    border-radius: 50%;
+    line-height: 100px;
+    text-align: center;
+    margin: 0 auto;
+}

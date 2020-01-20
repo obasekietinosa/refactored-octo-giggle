@@ -7,6 +7,7 @@ export default class App extends Component {
         super()
         this.state = {
             searchTerm: "",
+            foundNodeKey: "",
             nodes: [
                 {
                     value: "root",
@@ -68,6 +69,45 @@ export default class App extends Component {
     getSearchTerm = (e) => {
         let searchTerm = e.target.value
         this.setState({ searchTerm })
+    }
+
+    searchDepth = () => {
+        if (this.state.searchTerm.length < 1) {
+            this.setState({ error: "Please Insert a Search Term" })
+            return
+        }
+    }
+
+    searchBreath = () => {
+        if (this.state.searchTerm.length < 1) {
+            this.setState({ error: "Please Insert a Search Term" })
+            return
+        }
+        let queue = []
+        let breathFirstSearch = (needle, rootNode, queue) => {
+            console.log("On node " + rootNode.key)
+            if (rootNode.key === needle) {
+                console.log("Result Found!")
+                return rootNode
+            }
+
+            if (rootNode.left) {
+                queue.push(rootNode.left);
+            }
+            if (rootNode.right) {
+                queue.push(rootNode.right);
+            }
+            if (queue.length > 0) {
+                nextNode = queue.pop();
+                breathFirstSearch(needle, nextNode, queue);
+                return;
+            }
+            console.log("Breath First Search Completed. End of Tree")
+
+        }
+        let result = breathFirstSearch(this.state.searchTerm, this.state.nodes[0], queue)
+        let foundNodeKey = result ? result.key : ""
+        this.setState({ foundNodeKey })
     }
 
     render() {

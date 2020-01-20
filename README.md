@@ -9,9 +9,12 @@ This project implements a visual Tree data structure and allows searching via De
 ## Usage
 - Create a tree by Using the "Add Node" button.
 - Search for a specific node using the search box at the top.
-- If the node is found, it will be highlighted and the traversal will be shown underneath the search bar
+- If the node is found, it will be highlighted and the traversal will be shown underneath the search bar.
+
+## Implementation Details
+
 
 ## Limitations
 Limitations of this implementation include
-- Inability to delete nodes
+- Inability to delete the root node
 - When width exceeds viewport, the graph gets disfigured

@@ -73,7 +73,9 @@ export default class App extends Component {
     }
 
     deleteNode = (key) => {
-        console.log(key)
+        let nodes = this.state.nodes
+        nodes = this.set(key, undefined, nodes)
+        this.setState({ nodes })
     }
 
     updateNode = (key, value) => {

@@ -16,19 +16,22 @@ export default function Node(props) {
             <div className="row">
                     {
                         props.node.children.map((node, key) => {
-                            return (
-                                <div className="col">
-                                    <Node
-                                        key={key}
-                                        add={props.add}
-                                        delete={props.delete}
-                                        update={props.update}
-                                        isFound={props.isFound}
-                                        node={node}
-                                        position="left"
-                                    />
-                                </div>
-                            );
+                            if(node){
+                                return (
+                                    <div className="col">
+                                        <Node
+                                            key={key}
+                                            add={props.add}
+                                            delete={props.delete}
+                                            update={props.update}
+                                            isFound={props.isFound}
+                                            node={node}
+                                            position="left"
+                                        />
+                                    </div>
+                                );
+                            }
+                            return ""
                         })
                     }
             </div>

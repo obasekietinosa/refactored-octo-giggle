@@ -7,3 +7,8 @@
     text-align: center;
     margin: 0 auto;
 }
+
+.Node .value.found {
+    background-color: #000;
+    color: #fff;
+}

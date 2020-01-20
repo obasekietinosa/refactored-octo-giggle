@@ -7,23 +7,25 @@ export default class App extends Component {
         super()
         this.state = {
             searchTerm: "",
+            searchPath: "",
             foundNodeKey: "",
             nodes: [
                 {
                     value: "root",
                     key: "0",
-                    left: {
-                        value: "left",
-                        key: "0.left",
-                        left: null,
-                        right: null
-                    },
-                    right: {
-                        value: "right",
-                        key: "0.right",
-                        left: null,
-                        right: null
-                    }
+                    children: [
+                        {
+                            value: "left",
+                            key: "0.children.0",
+                            children: []
+                        },
+                        {
+                            value: "right",
+                            key: "0.children.1",
+                            children: []
+                        }
+                    ],
+
                 }
             ]
         }
@@ -85,22 +87,21 @@ export default class App extends Component {
         }
         let queue = []
         let breathFirstSearch = (needle, rootNode, queue) => {
-            console.log("On node " + rootNode.key)
-            if (rootNode.key === needle) {
+            let searchPath = this.state.searchPath
+            searchPath = " -> " + rootNode.key + ":" + rootNode.value
+            this.setState({ searchPath })
+            if (rootNode.value == needle) {
                 console.log("Result Found!")
                 return rootNode
             }
 
-            if (rootNode.left) {
-                queue.push(rootNode.left);
-            }
-            if (rootNode.right) {
-                queue.push(rootNode.right);
-            }
+            rootNode.children.forEach(node => {
+                queue.push(node)
+            });
+            
             if (queue.length > 0) {
-                nextNode = queue.pop();
-                breathFirstSearch(needle, nextNode, queue);
-                return;
+                let nextNode = queue.pop();
+                return breathFirstSearch(needle, nextNode, queue);
             }
             console.log("Breath First Search Completed. End of Tree")
 
@@ -110,22 +111,31 @@ export default class App extends Component {
         this.setState({ foundNodeKey })
     }
 
+    isFoundNode = (nodeKey) => nodeKey === this.state.foundNodeKey
+
     render() {
         return (
             <React.Fragment>
                 <div className="container">
                     <div className="row">
                         <div className="col-12">
-                            <input type="text" class="form-control" id="search" onChange={this.getSearchTerm} placeholder="Search Value"></input>
+                            <input type="text" className="form-control" id="search" onChange={this.getSearchTerm} placeholder="Search Value"></input>
                             <button className="btn btn-primary" onClick={this.searchDepth} >Search Depth First</button>
                             <button className="btn btn-primary" onClick={this.searchBreath} >Search Breath First</button>
                         </div>
+                        <p>{this.state.searchPath}</p>
                     </div>
                 </div>
                 <div className="container">
                     <div className="row">
                         <div className="col-12">
-                            <Node add={this.addNode} delete={this.deleteNode} update={this.updateNode} node={this.state.nodes[0]} />
+                            <Node
+                                add={this.addNode}
+                                delete={this.deleteNode}
+                                update={this.updateNode}
+                                isFound={this.isFoundNode}
+                                node={this.state.nodes[0]}
+                            />
                         </div>
                     </div>
                 </div>

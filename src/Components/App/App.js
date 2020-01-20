@@ -7,7 +7,7 @@ export default class App extends Component {
         super()
         this.state = {
             searchTerm: "",
-            searchPath: "",
+            searchPath: [],
             foundNodeKey: "",
             nodes: [
                 {
@@ -45,15 +45,29 @@ export default class App extends Component {
         return obj;
     }
 
-    addNode = (to, value, position) => {
+    get = (path, obj) => {
+        var schema = obj;  // a moving reference to internal objects within obj
+        console.log(path)
+        var pList = path.split('.');
+        var len = pList.length;
+        for (var i = 0; i < len - 1; i++) {
+            var elem = pList[i];
+            if (!schema[elem]) schema[elem] = {}
+            schema = schema[elem];
+        }
+        console.log(schema)
+        return schema;
+    }
+
+    addNode = (to, value) => {
+        let nodes = this.state.nodes
+        console.log(to)
         let newNode = {
             value: value,
-            key: to + "." + position,
-            left: null,
-            right: null
+            key: to + ".children." + (this.get(to, nodes).length++),
+            children: []
         }
 
-        let nodes = this.state.nodes
         nodes = this.set(newNode.key, newNode, nodes)
         this.setState({ nodes })
     }
@@ -72,6 +86,8 @@ export default class App extends Component {
         let searchTerm = e.target.value
         this.setState({ searchTerm })
     }
+    
+    isFoundNode = (nodeKey) => nodeKey === this.state.foundNodeKey
 
     searchDepth = () => {
         if (this.state.searchTerm.length < 1) {
@@ -85,10 +101,12 @@ export default class App extends Component {
             this.setState({ error: "Please Insert a Search Term" })
             return
         }
+        this.setState({ searchPath: [] })
         let queue = []
         let breathFirstSearch = (needle, rootNode, queue) => {
             let searchPath = this.state.searchPath
-            searchPath = " -> " + rootNode.key + ":" + rootNode.value
+            searchPath.push(rootNode.value)
+            console.log(queue)
             this.setState({ searchPath })
             if (rootNode.value == needle) {
                 console.log("Result Found!")
@@ -100,7 +118,7 @@ export default class App extends Component {
             });
             
             if (queue.length > 0) {
-                let nextNode = queue.pop();
+                let nextNode = queue.shift();
                 return breathFirstSearch(needle, nextNode, queue);
             }
             console.log("Breath First Search Completed. End of Tree")
@@ -110,8 +128,6 @@ export default class App extends Component {
         let foundNodeKey = result ? result.key : ""
         this.setState({ foundNodeKey })
     }
-
-    isFoundNode = (nodeKey) => nodeKey === this.state.foundNodeKey
 
     render() {
         return (
@@ -123,7 +139,7 @@ export default class App extends Component {
                             <button className="btn btn-primary" onClick={this.searchDepth} >Search Depth First</button>
                             <button className="btn btn-primary" onClick={this.searchBreath} >Search Breath First</button>
                         </div>
-                        <p>{this.state.searchPath}</p>
+                        <p>{this.state.searchPath.join("->")}</p>
                     </div>
                 </div>
                 <div className="container">

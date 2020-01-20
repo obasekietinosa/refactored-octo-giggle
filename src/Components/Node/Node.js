@@ -8,12 +8,10 @@ export default function Node(props) {
                 {/* <input onChange={ (e) => props.update(e.target.value) } /> */}
                 {props.node.value}
             </div>
-            <div className="text-center">
-                <p>
-                    <button onClick={() => props.delete(props.node.key)} className="btn btn-danger">Delete Node</button>
-                    &nbsp;
-                    <button onClick={() => props.add(props.node.key, (Math.floor(Math.random() * 100)))} className="btn btn-primary">Add Node</button>
-                </p>
+            <div className="text-center buttons">
+                <button onClick={() => props.delete(props.node.key)} className="btn btn-danger">Delete Node</button>
+                &nbsp;
+                <button onClick={() => props.add(props.node.key, (Math.floor(Math.random() * 100)))} className="btn btn-primary">Add Node</button>
             </div>
             <div className="row">
                     {
@@ -21,6 +19,7 @@ export default function Node(props) {
                             return (
                                 <div className="col">
                                     <Node
+                                        key={key}
                                         add={props.add}
                                         delete={props.delete}
                                         update={props.update}

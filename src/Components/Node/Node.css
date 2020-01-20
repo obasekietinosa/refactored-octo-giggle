@@ -12,3 +12,11 @@
     background-color: #000;
     color: #fff;
 }
+/* 
+.Node .buttons {
+    display: none;
+}
+
+.Node .value:active + .buttons {
+    display: block;
+} */

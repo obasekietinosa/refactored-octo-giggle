@@ -94,6 +94,31 @@ export default class App extends Component {
             this.setState({ error: "Please Insert a Search Term" })
             return
         }
+        this.setState({ searchPath: [] })
+        let stack = []
+        let depthFirstSearch = (needle, rootNode, stack) => {
+            let searchPath = this.state.searchPath
+            searchPath.push(rootNode.value)
+            console.log(stack)
+            this.setState({ searchPath })
+            if (rootNode.value == needle) {
+                console.log("Result Found!")
+                return rootNode
+            }
+
+            rootNode.children.forEach(node => {
+                stack.unshift(node)
+            });
+            
+            if (stack.length > 0) {
+                let nextNode = stack.shift();
+                return depthFirstSearch(needle, nextNode, stack);
+            }
+            console.log("Depth First Search Completed. End of Tree")
+        }
+        let result = depthFirstSearch(this.state.searchTerm, this.state.nodes[0], stack)
+        let foundNodeKey = result ? result.key : ""
+        this.setState({ foundNodeKey })
     }
 
     searchBreath = () => {
